@@ -1,0 +1,55 @@
+version: '3'
+services:
+  producer:
+    container_name: producer
+    image: greencity:latest
+    networks:
+      - greencity-network
+    depends_on:
+      - kafka
+      - zookeeper
+    entrypoint: ["/usr/bin/producer"]
+
+  consumer:
+    container_name: consumer
+    image: greencity:latest
+    networks:
+      - greencity-network
+    depends_on:
+      - kafka
+      - zookeeper
+    entrypoint: ["/usr/bin/consumer"]
+
+  zookeeper:
+    container_name: zookeeper
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    ports:
+      - "2181:2181"
+    networks:
+      - greencity-network
+
+  kafka:
+    container_name: kafka
+    image: confluentinc/cp-kafka:latest
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+    ports:
+      - "9092:9092"
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    networks:
+      - greencity-network
+    depends_on:
+      - zookeeper
+
+volumes:
+  kafka-data:
+
+networks:
+  greencity-network:
