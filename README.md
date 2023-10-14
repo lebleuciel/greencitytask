@@ -1,7 +1,12 @@
 # Greencity task
 
-This project implements a system of two microservices using Golang that communicate via the Kafka message broker.
+This project involves the implementation of two microservices in Golang that communicate via the Kafka message broker. The first microservice acts as a producer, while the second microservice is a consumer.
 
+
+
+
+## Consumer and Producer Microservices Explanation
+This Go program sets up a Kafka consumer. It listens for messages from a Kafka topic named "greencity-topic" on partitions 0, 1, 2, and 3. When a message arrives, it checks if the message consists of specific allowed words like "Green," "City," "Tehran," and others. If the message contains only these allowed words, it's considered verified. The consumer collects and verifies messages from different partitions, and if a complete message is obtained across partitions, it prints a verification log. This program uses the IBM/sarama package for Kafka communication and works to ensure that messages are correctly received and verified.
 # Installation
 ## Setting Up Kafka and Zookeeper
 
@@ -29,7 +34,6 @@ docker logs producer
 docker logs consumer
 ```
 
-# Conclusion
 
 ## License
 
