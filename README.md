@@ -19,7 +19,7 @@ make run-compose name="zookeeper kafka"
 To create a Kafka topic with 4 partitions, use the following command:
 
 ```bash
-make run-compose name="zookeeper kafka"
+make create-kafka-topic
 ```
 ## Running the Producer and Consumer
 
