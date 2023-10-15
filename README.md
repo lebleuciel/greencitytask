@@ -21,6 +21,14 @@ To create a Kafka topic with 4 partitions, use the following command:
 ```bash
 make create-kafka-topic
 ```
+## Building the image
+
+To create the Greencity Docker image, run the following command:
+
+```bash
+make build 
+```
+This command generates the "greencity:latest" image. While building the container, you can customize the entrypoint to specify whether you want to run it as a consumer or producer.
 ## Running the Producer and Consumer
 
 To run the Kafka Producer and Consumer, use the following command:
